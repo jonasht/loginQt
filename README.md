@@ -52,7 +52,7 @@ To run this project locally, follow these steps.
 Once the dependencies are installed, you can run the application with the following command:
 
 ```bash
-python w_login.py
+python main.py
 ```
 
 ---
@@ -112,5 +112,5 @@ Para executar este projeto localmente, siga estes passos.
 Após a instalação das dependências, você pode executar a aplicação com o seguinte comando:
 
 ```bash
-python w_login.py
+python main.py
 ```

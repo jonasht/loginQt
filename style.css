@@ -259,7 +259,7 @@ QLabel#info-inverse {
 
 QFrame { 
     border-radius: 8px;
-    background-color: #222222;
+    background-color: #101010;
 }
 /* Frame Success */
 QFrame#success {
