@@ -2,8 +2,7 @@
 
 A simple login interface built with Python and PyQt6, featuring a modern UI styled with CSS.
 
-![Screenshot of the login window](placeholder.png)
-*(You can add a screenshot of the application here)*
+![Screenshot of the login window](login.png)
 
 ---
 
