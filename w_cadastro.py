@@ -15,7 +15,7 @@ class Wcadastro (QWidget):
         layout_main = QVBoxLayout()
         layout_cima = QVBoxLayout()
         layout_meio = QGridLayout()
-        layout_baixo = QHBoxLayout()
+        layout_baixo = QGridLayout()
 
         # titulo
         frame_titulo = QFrame()
@@ -35,30 +35,35 @@ class Wcadastro (QWidget):
         layout_meio.addWidget(self.lb_nome, 0, 0)
         layout_meio.addWidget(self.le_nome, 0, 1)
 
-        # cpf
-        self.lb_cpf = QLabel('CPF:')
-        self.le_cpf = QLineEdit()
-        layout_meio.addWidget(self.lb_cpf, 1, 0)
-        layout_meio.addWidget(self.le_cpf, 1, 1)
+        # senha
+        self.lb_senha = QLabel('Senha:')
+        self.le_senha = QLineEdit()
+        layout_meio.addWidget(self.lb_senha, 1, 0)
+        layout_meio.addWidget(self.le_senha, 1, 1)
 
-        # telefone 
-        self.lb_fone = QLabel('Fone:')
-        self.le_fone = QLineEdit()
-        layout_meio.addWidget(self.lb_fone, 2, 0)
-        layout_meio.addWidget(self.le_fone, 2, 1)        
+        # reSenha 
+        self.lb_reSenha = QLabel('Novamente a Senha:')
+        self.le_reSenha = QLineEdit()
+        layout_meio.addWidget(self.lb_reSenha, 2, 0)
+        layout_meio.addWidget(self.le_reSenha, 2, 1)        
 
         # botoes
         self.bt_cadastrar = QPushButton('Cadastrar')
         self.bt_resetar = QPushButton('Resetar')
+        self.bt_voltar = QPushButton('Voltar')
         self.bt_cadastrar.setObjectName(u.SUCCESS)
         self.bt_resetar.setObjectName(u.DANGER)
+        self.bt_voltar.setObjectName(u.PRIMARY)
         
-        layout_baixo.addWidget(self.bt_resetar)
-        layout_baixo.addWidget(self.bt_cadastrar)
-
+        layout_baixo.addWidget(self.bt_resetar, 0, 0)
+        layout_baixo.addWidget(self.bt_cadastrar, 0, 1)
+        layout_baixo.addWidget(self.bt_voltar, 1, 0, 1, 2)
         
         layout_main.addLayout(layout_cima)
+        layout_main.addStretch()
+
         layout_main.addLayout(layout_meio)
+        layout_main.addStretch()
         layout_main.addLayout(layout_baixo)
 
         self.setLayout(layout_main)
