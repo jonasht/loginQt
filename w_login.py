@@ -20,14 +20,12 @@ class W_login (QWidget):
   def __init__(self) -> None:
       super().__init__()
       
-      # Layout principal da janela
       layout_main = QVBoxLayout()
 
       layout_cima = QHBoxLayout()
       layout_meio = QGridLayout()
       layout_baixo = QGridLayout()
 
-      # 1. Crie o Frame que servirá como container
       frame_main = QFrame()
       
       # titulo
