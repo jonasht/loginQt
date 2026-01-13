@@ -7,6 +7,13 @@ INFO = 'info'
 WARNING = 'warning'
 LINK = 'link'
 
+PRIMARY_BORDER = 'primary-border'
+SECONDARY_BORDER = 'secondary-border'
+SUCCESS_BORDER = 'success-border'
+DANGER_BORDER = 'danger-border'
+INFO_BORDER = 'info-border'
+WARNING_BORDER = 'warning-border'
+
 OUTLINE_INFO = 'info-outline'
 
 INVERSE_INFO = 'info-inverse'
@@ -16,7 +23,7 @@ INVERSE_INFO = 'info-inverse'
 
 
 def get_style():
-    with open('./style.css', 'r') as file:
+    with open('./style/style.css', 'r') as file:
         return file.read()
 
 class Colors:

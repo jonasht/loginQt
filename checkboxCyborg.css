@@ -1,0 +1,29 @@
+/* /home/jon/programs/2.loginQt/checkboxCyborg.css */
+QCheckBox {
+  spacing: 10px;
+  color: #ffffff;
+}
+
+QCheckBox::indicator {
+  width: 20px;
+  height: 20px;
+}
+
+QCheckBox::indicator:unchecked {
+  background-color: #3e3f3a;
+  border: 1px solid #5e5e5c;
+}
+
+QCheckBox::indicator:checked {
+  background-color: #2a9fd6;
+  border: 1px solid #2a9fd6;
+}
+
+QCheckBox::indicator:disabled {
+  background-color: #3e3f3a;
+  border: 1px solid #5e5e5c;
+}
+
+QCheckBox:disabled {
+  color: #5e5e5c;
+}

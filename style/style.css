@@ -5,12 +5,104 @@ QWidget {
     background-color: #060606;
 }
 
-/* Labels */
+/* Labels =-=-=-=-=-=-=-=-=-=-=*/ 
 QLabel {
     color: #ffffff;
     font-size: 15px;
     font-weight: 500;
+    border: transparent;
+    background-color: transparent;
+    padding: 0px;
 }
+/* QLabel Primary */
+QLabel#primary {
+    color: #2a9fd6;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+/* QLabel Secondary */
+QLabel#secondary {
+    color: #555555;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+/* QLabel Success */
+QLabel#success {
+    color: #77b300;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+/* QLabel Danger */
+QLabel#danger {
+    color: #cc0000;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+/* QLabel Warning */
+QLabel#warning {
+    color: #ff8800;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+/* QLabel Info */
+QLabel#info {
+    color: #9933cc;
+    font-weight: 600;
+    background-color: transparent;
+}
+/* QLabel Primary Border */
+QLabel#primary-border {
+    color: #2a9fd6;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid #2a9fd6;
+}
+
+/* QLabel Secondary Border */
+QLabel#secondary-border {
+    color: #555555;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid #555555;
+}
+
+/* QLabel Success Border */
+QLabel#success-border {
+    color: #77b300;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid #77b300;
+}
+
+/* QLabel Danger Border */
+QLabel#danger-border {
+    color: #cc0000;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid #cc0000;
+}
+
+/* QLabel Warning Border */
+QLabel#warning-border {
+    color: #ff8800;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid #ff8800;
+}
+
+/* QLabel Info Border */
+QLabel#info-border {
+    color: #9933cc;
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid #9933cc;
+}
+
 
 /* campos QTextEdit */
 QTextEdit {
@@ -213,48 +305,7 @@ QLineEdit#info:focus {
     background-color: #222222;
 }
 
-/* QLabel Primary */
-QLabel#primary {
-    color: #2a9fd6;
-    font-weight: 600;
-}
 
-/* QLabel Secondary */
-QLabel#secondary {
-    color: #555555;
-    font-weight: 600;
-}
-
-/* QLabel Success */
-QLabel#success {
-    color: #77b300;
-    font-weight: 600;
-}
-
-/* QLabel Danger */
-QLabel#danger {
-    color: #cc0000;
-    font-weight: 600;
-}
-
-/* QLabel Warning */
-QLabel#warning {
-    color: #ff8800;
-    font-weight: 600;
-}
-
-/* QLabel Info */
-QLabel#info {
-    color: #9933cc;
-    font-weight: 600;
-}
-
-/* QLabel Info Inverse */
-QLabel#info-inverse {
-    color: #ffffff;
-    background-color: #9933cc;
-    font-weight: 600;
-}
 /* Frame default */
 
 QFrame { 
@@ -262,42 +313,41 @@ QFrame {
     background-color: #101010;
 }
 /* Frame Success */
-QFrame#success {
+QFrame#fr-success {
     border: 2px solid #77b300;
     border-radius: 8px;
     background-color: #191919;
 }
 
 /* Frame Primary */
-QFrame#primary {
+QFrame#fr-primary {
     border: 2px solid #2a9fd6;
     border-radius: 8px;
     background-color: #191919;
 }
 
 /* Frame Danger */
-QFrame#danger {
+QFrame#fr-danger {
     border: 2px solid #cc0000;
     border-radius: 8px;
     background-color: #191919;
 }
 /* Frame Warning */
-QFrame#warning {
+QFrame#fr-warning {
     border: 2px solid #ff8800;
     border-radius: 8px;
     background-color: #191919;
 }
 
 /* Frame Info */
-QFrame#info {
+QFrame#fr-info {
     
     border-radius: 8px;
     background-color: #9933cc;
 } 
-QFrame#info-outline {
+QFrame#fr-outline-info {
     border: 2px solid #9933cc;
     border-radius: 8px;
     background-color: #191919;
 } 
-
-/* Frame Default */
+/* checkbox */

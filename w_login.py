@@ -62,21 +62,33 @@ class W_login (QWidget):
       self.le_senha.setAlignment(CENTER)
       self.lb_usuario.setAlignment(RIGHT | CENTER_V)
       self.lb_senha.setAlignment(RIGHT | CENTER_V)
+      # botao link esqueceu a senha
+      self.bt_esqueceuSenha = QPushButton('Esqueceu a senha?')
+      self.bt_esqueceuSenha.setObjectName(u.LINK)
+      layout_meio.addWidget(self.bt_esqueceuSenha, 2, 1)
+      self.bt_esqueceuSenha.setStyleSheet('''text-align: right;''')
 
       
       # botoes
+      layout_bts = QGridLayout()
       self.bt_entrar = QPushButton('Entrar')
-      self.bt_fechar = QPushButton('Fechar')
-      
+      self.bt_cadastrar = QPushButton('Fazer Cadastrar')
+
       self.bt_entrar.setObjectName(u.SUCCESS)
-      self.bt_fechar.setObjectName(u.DANGER)
+      self.bt_cadastrar.setObjectName(u.INFO)
       self.bt_entrar.clicked.connect(self.fazer_login)
+      
+      
+      layout_bts.addWidget(self.bt_entrar, 0, 0)
+      layout_bts.addWidget(self.bt_cadastrar, 1, 0)
+      
+      self.bt_fechar = QPushButton('Fechar')
+      self.bt_fechar.setObjectName(u.DANGER)
+
       self.bt_fechar.clicked.connect(self.close)
-      
-      
-      layout_baixo.addWidget(self.bt_entrar, 0, 0)
-      layout_baixo.addWidget(self.bt_fechar, 1, 0)
-      
+      layout_baixo.addWidget(self.bt_fechar)
+
+      # colocando layouts e frame
       layout_centro_h = QHBoxLayout()
       layout_centro_h.addStretch()
       layout_centro_h.addLayout(layout_meio)
@@ -88,8 +100,9 @@ class W_login (QWidget):
       layout_do_frame.addLayout(layout_centro_h) 
       layout_do_frame.addStretch()
       
+      layout_do_frame.addLayout(layout_bts)
       layout_do_frame.addLayout(layout_baixo)
-      layout_do_frame.setContentsMargins(0, 0, 0, 0)
+      layout_do_frame.setContentsMargins(12,0,12,12)
       frame_main.setLayout(layout_do_frame)
       frame_main.setFixedHeight(600)
       frame_main.setFixedWidth(500)
