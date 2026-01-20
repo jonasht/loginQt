@@ -8,7 +8,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt
 import sys
 import util as u
-
+from style import *
+import bd
 
 CENTER = Qt.AlignmentFlag.AlignCenter
 CENTER_TOP = Qt.AlignmentFlag.AlignTop | CENTER
@@ -64,18 +65,23 @@ class W_login (QWidget):
       self.lb_senha.setAlignment(RIGHT | CENTER_V)
       # botao link esqueceu a senha
       self.bt_esqueceuSenha = QPushButton('Esqueceu a senha?')
-      self.bt_esqueceuSenha.setObjectName(u.LINK)
+      self.bt_esqueceuSenha.setObjectName(LINK)
       layout_meio.addWidget(self.bt_esqueceuSenha, 2, 1)
       self.bt_esqueceuSenha.setStyleSheet('''text-align: right;''')
 
-      
+      # label aviso
+      self.lb_aviso = QLabel('aviso aqui')
+      self.lb_aviso.setAlignment(CENTER)
+
+      layout_meio.addWidget(self.lb_aviso, 3, 1)
+
       # botoes
       layout_bts = QGridLayout()
       self.bt_entrar = QPushButton('Entrar')
       self.bt_cadastrar = QPushButton('Fazer Cadastrar')
 
-      self.bt_entrar.setObjectName(u.SUCCESS)
-      self.bt_cadastrar.setObjectName(u.INFO)
+      self.bt_entrar.setObjectName(SUCCESS)
+      self.bt_cadastrar.setObjectName(INFO)
       self.bt_entrar.clicked.connect(self.fazer_login)
       
       
@@ -83,7 +89,7 @@ class W_login (QWidget):
       layout_bts.addWidget(self.bt_cadastrar, 1, 0)
       
       self.bt_fechar = QPushButton('Fechar')
-      self.bt_fechar.setObjectName(u.DANGER)
+      self.bt_fechar.setObjectName(DANGER)
 
       self.bt_fechar.clicked.connect(self.close)
       layout_baixo.addWidget(self.bt_fechar)
@@ -114,19 +120,29 @@ class W_login (QWidget):
   def fazer_login(self):
       usuario = self.le_usuario.text()
       senha = self.le_senha.text()
-      print('usuario:', usuario)
-      print('senha:', senha)
+      
+      if not usuario or not senha:
+        print('preecha todos os campos')
+        self.lb_aviso.setText('preencha todos os campos')
+        self.lb_aviso.setObjectName(DANGER)
+      else:
+        conta_valida = bd.validar_conta(usuario, senha)
+        print('==========================================================================')
+        print('login feito com sucesso' if conta_valida else 'login invalido')
+        print(f'usario:', usuario)
+        print(f'senha:', senha)
+      
 
-  def keyPressEvent(self, event):
+  def keyPressEvent(self, event): # type:ignore
 
       if event.key() == Qt.Key.Key_Escape or event.key() == Qt.Key.Key_Q:
           self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    widget = W_login()
+    window = W_login()
+    window.setStyleSheet(get_style())
     
-    widget.setStyleSheet(u.get_style())
-    widget.setGeometry(100, 100, 800, 800)
-    widget.show()
+    window.setGeometry(100, 100, 800, 800)
+    window.show()
     sys.exit(app.exec())

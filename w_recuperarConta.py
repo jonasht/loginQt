@@ -8,6 +8,9 @@ from PyQt6.QtWidgets import (
 import sys
 from PyQt6.QtCore import Qt
 import util as u
+from style import *
+
+
 
 CENTER = Qt.AlignmentFlag.AlignCenter
 CENTER_TOP = Qt.AlignmentFlag.AlignTop | CENTER
@@ -55,7 +58,7 @@ class W_recuperarConta(QWidget):
         
         # botao recuperar senha
         self.bt_recuperarSenha = QPushButton('Recuperar senha')
-        self.bt_recuperarSenha.setObjectName(u.SUCCESS)
+        self.bt_recuperarSenha.setObjectName(SUCCESS)
         
         # senha
         self.lb_senha = QLabel('Senha:')
@@ -63,7 +66,7 @@ class W_recuperarConta(QWidget):
         self.lb_senha.setAlignment(CENTER | RIGHT)
         # botao copiar senha
         self.bt_copiar = QPushButton('Copiar')
-        self.bt_copiar.setObjectName(u.INFO)
+        self.bt_copiar.setObjectName(INFO)
 
         layout_meio.addWidget(self.lb_email, 0, 0)
         layout_meio.addWidget(self.le_email, 0, 1)
@@ -75,7 +78,7 @@ class W_recuperarConta(QWidget):
         
         # botao voltar
         self.bt_voltar = QPushButton('Voltar')
-        self.bt_voltar.setObjectName(u.PRIMARY)
+        self.bt_voltar.setObjectName(PRIMARY)
         layout_baixo.addWidget(self.bt_voltar)
         
 
@@ -89,7 +92,7 @@ class W_recuperarConta(QWidget):
         self.setLayout(layout_main)
 
     # esc to exit
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event): #type:ignore
         if event.key() == Qt.Key.Key_Escape:
             self.close() 
     
@@ -99,5 +102,5 @@ if __name__ == '__main__':
     window.setGeometry(100, 100, 800, 800)
 
     window.show()
-    app.setStyleSheet(u.get_style())
+    app.setStyleSheet(get_style())
     sys.exit(app.exec())

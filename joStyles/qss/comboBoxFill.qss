@@ -1,0 +1,320 @@
+QComboBox#primary-fill {
+    background-color: @primary;
+    color: @fgprimary;
+    border: 1px solid @primary;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 6em;
+}
+
+QComboBox#primary-fill:hover {
+    border: 1.5px solid @primarylight;
+}
+
+QComboBox#primary-fill:focus {
+    border: 2px solid @primary;
+    background-color: @primarydark;
+}
+
+QComboBox#primary-fill::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 2px solid @primarylight;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: transparent;
+}
+
+QComboBox#primary-fill::drop-down:hover {
+    background: @primarylight;
+}
+
+QComboBox#primary-fill::down-arrow {
+    image: url(icons/arrow-down.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QComboBox#primary-fill::down-arrow:on {
+    image: url(icons/arrow-up.svg);
+}
+
+QComboBox#primary-fill QAbstractItemView {
+    border: 2px solid @primary;
+}
+/* =========================
+   QComboBox secondary
+   ========================= */
+QComboBox#secondary-fill {
+    background-color: @secondary;
+    color: @fgsecondary;
+    border: 1px solid @secondary;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 6em;
+}
+
+QComboBox#secondary-fill:hover {
+    border: 1.5px solid @secondarylight;
+}
+
+QComboBox#secondary-fill:focus {
+    border: 2px solid @secondary;
+    background-color: @secondarydark;
+}
+
+QComboBox#secondary-fill::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 2px solid @secondarylight;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: transparent;
+}
+
+QComboBox#secondary-fill::drop-down:hover {
+    background: @secondarylight;
+}
+
+QComboBox#secondary-fill::down-arrow {
+    image: url(icons/arrow-down.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QComboBox#secondary-fill::down-arrow:on {
+    image: url(icons/arrow-up.svg);
+}
+
+QComboBox#secondary-fill QAbstractItemView {
+    border: 2px solid @secondary;
+}
+/* =========================
+   QComboBox success
+   ========================= */
+QComboBox#success-fill {
+    background-color: @success;
+    color: @fgsuccess;
+    border: 1px solid @success;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 6em;
+}
+
+QComboBox#success-fill:hover {
+    border: 1.5px solid @successlight;
+}
+
+QComboBox#success-fill:focus {
+    border: 2px solid @success;
+    background-color: @successdark;
+}
+
+QComboBox#success-fill::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 2px solid @successlight;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: transparent;
+}
+
+QComboBox#success-fill::drop-down:hover {
+    background: @successlight;
+}
+
+QComboBox#success-fill::down-arrow {
+    image: url(icons/arrow-down.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QComboBox#success-fill::down-arrow:on {
+    image: url(icons/arrow-up.svg);
+}
+
+QComboBox#success-fill QAbstractItemView {
+    border: 2px solid @success;
+}
+
+/* =========================
+   QComboBox info
+   ========================= */
+QComboBox#warning-fill {
+    background-color: @warning;
+    color: @fgwarning;
+    border: 1px solid @warning;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 6em;
+}
+
+QComboBox#warning-fill:hover {
+    border: 1.5px solid @warninglight;
+}
+
+QComboBox#warning-fill:focus {
+    border: 2px solid @warning;
+    background-color: @warningdark;
+}
+
+QComboBox#warning-fill::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 2px solid @warninglight;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: transparent;
+}
+
+QComboBox#warning-fill::drop-down:hover {
+    background: @warninglight;
+}
+
+QComboBox#info-fill::down-arrow {
+    image: url(icons/arrow-down.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QComboBox#info-fill::down-arrow:on {
+    image: url(icons/arrow-up.svg);
+}
+
+QComboBox#info-fill QAbstractItemView {
+    border: 2px solid @info;
+}
+/* =========================
+   QComboBox warning
+   ========================= */
+QComboBox#info-fill {
+    background-color: @info;
+    color: @fginfo;
+    border: 1px solid @info;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 6em;
+}
+
+QComboBox#info-fill:hover {
+    border: 1.5px solid @infolight;
+}
+
+QComboBox#info-fill:focus {
+    border: 2px solid @info;
+    background-color: @infodark;
+}
+
+QComboBox#info-fill::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 2px solid @infolight;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: transparent;
+}
+
+QComboBox#info-fill::drop-down:hover {
+    background: @infolight;
+}
+
+QComboBox#info-fill::down-arrow {
+    image: url(icons/arrow-down.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QComboBox#info-fill::down-arrow:on {
+    image: url(icons/arrow-up.svg);
+}
+
+QComboBox#info-fill QAbstractItemView {
+    border: 2px solid @info;
+}
+
+/* =========================
+   QComboBox danger
+   ========================= */
+QComboBox#danger-fill {
+    background-color: @danger;
+    color: @fgdanger;
+    border: 1px solid @danger;
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 6em;
+}
+
+QComboBox#danger-fill:hover {
+    border: 1.5px solid @dangerlight;
+}
+
+QComboBox#danger-fill:focus {
+    border: 2px solid @danger;
+    background-color: @dangerdark;
+}
+
+QComboBox#danger-fill::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 2px solid @dangerlight;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: transparent;
+}
+
+QComboBox#danger-fill::drop-down:hover {
+    background: @dangerlight;
+}
+
+QComboBox#danger-fill::down-arrow {
+    image: url(icons/arrow-down.svg);
+    width: 16px;
+    height: 16px;
+}
+
+QComboBox#danger-fill::down-arrow:on {
+    image: url(icons/arrow-up.svg);
+}
+
+QComboBox#danger-fill QAbstractItemView {
+    border: 2px solid @danger;
+}
+
+/* combobox fill disabled */
+QComboBox#primary-fill:disabled {
+    background-color: @primarydark;
+    color: @fgprimarydis;
+    border-color: @primarylight;
+}
+QComboBox#secondary-fill:disabled {
+    background-color: @secondarydark;
+    color: @fgsecondarydis;
+    border-color: @secondarylight;
+}
+QComboBox#success-fill:disabled {
+    background-color: @successdark;
+    color: @fgsuccessdis;
+    border-color: @successlight;
+}
+QComboBox#info-fill:disabled {
+    background-color: @infodark;
+    color: @fgsuccessdis;
+    border-color: @infolight;
+}
+
+QComboBox#warning-fill:disabled {
+    background-color: @warningdark;
+    color: @fgwarningdis;
+    border-color: @warninglight;
+}
+QComboBox#danger-fill:disabled {
+    background-color: @dangerdark;
+    color: @fgdarkdis;
+    border-color: @dangerlight;
+}

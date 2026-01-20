@@ -1,49 +1,9 @@
 import textwrap
-PRIMARY = 'primary'
-SECONDARY = 'secondary'
-SUCCESS = 'success'
-DANGER = 'danger'
-INFO = 'info'
-WARNING = 'warning'
-LINK = 'link'
-
-PRIMARY_BORDER = 'primary-border'
-SECONDARY_BORDER = 'secondary-border'
-SUCCESS_BORDER = 'success-border'
-DANGER_BORDER = 'danger-border'
-INFO_BORDER = 'info-border'
-WARNING_BORDER = 'warning-border'
-
-OUTLINE_INFO = 'info-outline'
-
-INVERSE_INFO = 'info-inverse'
 
 
+from style import Color
 
 
-
-def get_style():
-    with open('./style/style.css', 'r') as file:
-        return file.read()
-
-class Colors:
-    primary = "#2a9fd6"
-    secondary = "#555555"
-    success = "#77b300"
-    danger = "#cc0000"
-    warning = "#ff8800"
-    info = "#9933cc"
-    dark = "#222222"
-    light = "#ADAFAE"
-    white = "#ffffff"
-    black = "#060606"
-    bg = "#060606"
-    fg = "#ffffff"
-    selectbg = "#454545"
-    selectfg = "#ffffff"
-    border = "#060606"
-    inputfg = "#ffffff"
-    inputbg = "#191919"
 class TopTitle:
         # background-color: #9933cc;
     # label
@@ -55,7 +15,7 @@ class TopTitle:
     
     # frame
     frame = textwrap.dedent(f'''
-        background-color: {Colors.info};
+        background-color: {Color.INFO};
         border-bottom-right-radius: 50px;
         border-bottom-left-radius: 50px;
         border-top-left-radius: 0px;
@@ -63,4 +23,4 @@ class TopTitle:
           ''').strip()
 
 if __name__ == '__main__':
-    print(get_geometry())
+    pass 

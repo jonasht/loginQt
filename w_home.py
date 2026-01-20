@@ -6,7 +6,7 @@ import sys
 from PyQt6.QtCore import Qt
 import util as u
 from style import *
-
+import bd
 
 
 CENTER = Qt.AlignmentFlag.AlignCenter
@@ -40,19 +40,31 @@ class Wcadastro (QWidget):
         frame_titulo.setFixedWidth(250)
         frame_titulo.setFixedHeight(80)
         
+        # id =
+        self.lb_id = QLabel('ID:')
+        self.lb_idShow = QLabel('001')
+        layout_meio.addWidget(self.lb_id,0,0)
+        layout_meio.addWidget(self.lb_idShow,0,1)
+        
         # nome
         self.lb_nome = QLabel('Nome:')
         self.le_nome = QLineEdit()
         self.lb_nome.setAlignment(RIGHT|CENTER)
-        layout_meio.addWidget(self.lb_nome, 0, 0)
-        layout_meio.addWidget(self.le_nome, 0, 1)
+        layout_meio.addWidget(self.lb_nome, 1, 0)
+        layout_meio.addWidget(self.le_nome, 1, 1)
         
         # email
         self.lb_email = QLabel('Email:')
         self.le_email = QLineEdit()
         self.lb_email.setAlignment(RIGHT|CENTER)
-        layout_meio.addWidget(self.lb_email, 1, 0)
-        layout_meio.addWidget(self.le_email, 1, 1)
+        layout_meio.addWidget(self.lb_email, 2, 0)
+        layout_meio.addWidget(self.le_email, 2, 1)
+
+        # usuario / login
+        self.lb_usuario = QLabel('Usuario:')
+        self.le_usuario = QLineEdit()
+        layout_meio.addWidget(self.lb_usuario,3,0)
+        layout_meio.addWidget(self.le_usuario, 3, 1)
 
         # senha
         self.lb_senha = QLabel('Senha:')
@@ -62,29 +74,18 @@ class Wcadastro (QWidget):
         self.cb_senha.stateChanged.connect(self.show_password)
         self.lb_senha.setAlignment(RIGHT|CENTER)
 
-        layout_meio.addWidget(self.lb_senha, 2, 0)
-        layout_meio.addWidget(self.le_senha, 2, 1)
-        layout_meio.addWidget(self.cb_senha, 2, 3)
+        layout_meio.addWidget(self.lb_senha, 4, 0)
+        layout_meio.addWidget(self.le_senha, 4, 1)
+        layout_meio.addWidget(self.cb_senha, 4, 3)
 
-        # reSenha 
-        self.lb_reSenha = QLabel('Redigite a Senha:')
-        self.le_reSenha = QLineEdit()
-        self.le_reSenha.setEchoMode(QLineEdit.EchoMode.Password)
-        self.lb_reSenha.setAlignment(RIGHT|CENTER)
-        
-        layout_meio.addWidget(self.lb_reSenha, 3, 0)
-        layout_meio.addWidget(self.le_reSenha, 3, 1)        
 
         # botoes ---------------------------------------
         
-        self.bt_cadastrar = QPushButton('Cadastrar')
-        self.bt_resetar = QPushButton('Resetar')
-        self.bt_cadastrar.setObjectName(SUCCESS)
-        self.bt_resetar.setObjectName(WARNING)
+        self.bt_editar = QPushButton('Editar')
+        self.bt_editar.setObjectName(PRIMARY)
         
-        layout_bts.addWidget(self.bt_resetar)
-        layout_bts.addWidget(self.bt_cadastrar)
-        layout_meio.addLayout(layout_bts, 4, 1)
+        layout_bts.addWidget(self.bt_editar)
+        layout_meio.addLayout(layout_bts, 5, 1)
         # botao voltar --------------------------------
         self.bt_voltar = QPushButton('Voltar')
         self.bt_voltar.setObjectName(PRIMARY)
@@ -103,13 +104,47 @@ class Wcadastro (QWidget):
         layout_main.addWidget(frame_container)
         self.setLayout(layout_main)
         
+        self.bt_editar.clicked.connect(self.change_les)
+        
+        self.start()
+        
+    def start(self):
+        self.le_nome.setText(bd.NOME)
+        self.le_email.setText(bd.EMAIL)
+        self.le_senha.setText(bd.SENHA)
+
+        self.le_nome.setDisabled(True)
+        self.le_email.setDisabled(True)
+        self.le_senha.setDisabled(True)
+        
+
+    def change_les(self):
+        print('mudar')
+        print(self.le_nome.isEnabled())
+        if self.le_nome.isEnabled():
+            self.le_nome.setEnabled(False)
+            self.le_email.setEnabled(False)
+            self.le_senha.setEnabled(False)
+            self.bt_editar.setText('Editar')
+            self.bt_editar.setObjectName(PRIMARY)
+            # self.bt_editar.style().unpolish(self.bt_editar)
+            self.bt_editar.style().polish(self.bt_editar)
+        else:
+            self.le_nome.setEnabled(True)
+            self.le_email.setEnabled(True)
+            self.le_senha.setEnabled(True)
+            self.bt_editar.setText('Confirmar')
+            self.bt_editar.setObjectName(SUCCESS)
+            # self.bt_editar.style().unpolish(self.bt_editar)
+            self.bt_editar.style().polish(self.bt_editar)
+
+
     def show_password(self):
         if self.cb_senha.isChecked():
             self.le_senha.setEchoMode(QLineEdit.EchoMode.Normal)
-            self.le_reSenha.setEchoMode(QLineEdit.EchoMode.Normal)
         else:
             self.le_senha.setEchoMode(QLineEdit.EchoMode.Password)
-            self.le_reSenha.setEchoMode(QLineEdit.EchoMode.Password)
+            
         
     
     def keyPressEvent(self, event): #type:ignore
