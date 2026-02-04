@@ -6,7 +6,7 @@ import sys
 from PyQt6.QtCore import Qt
 import util as u
 from style import *
-
+import bd
 
 
 CENTER = Qt.AlignmentFlag.AlignCenter
@@ -41,11 +41,11 @@ class Wcadastro (QWidget):
         frame_titulo.setFixedHeight(80)
         
         # nome
-        self.lb_nome = QLabel('Nome:')
-        self.le_nome = QLineEdit()
-        self.lb_nome.setAlignment(RIGHT|CENTER)
-        layout_meio.addWidget(self.lb_nome, 0, 0)
-        layout_meio.addWidget(self.le_nome, 0, 1)
+        self.lb_usuario = QLabel('Usuario:')
+        self.le_usuario = QLineEdit()
+        self.lb_usuario.setAlignment(RIGHT|CENTER)
+        layout_meio.addWidget(self.lb_usuario, 0, 0)
+        layout_meio.addWidget(self.le_usuario, 0, 1)
         
         # email
         self.lb_email = QLabel('Email:')
@@ -85,6 +85,12 @@ class Wcadastro (QWidget):
         layout_bts.addWidget(self.bt_resetar)
         layout_bts.addWidget(self.bt_cadastrar)
         layout_meio.addLayout(layout_bts, 4, 1)
+        
+        # label aviso --------------------------------------
+        self.lb_aviso = QLabel('aviso....')
+        layout_meio.addWidget(self.lb_aviso, 5, 1, 1, 3)
+        self.lb_aviso.setAlignment(CENTER)
+
         # botao voltar --------------------------------
         self.bt_voltar = QPushButton('Voltar')
         self.bt_voltar.setObjectName(PRIMARY)
@@ -103,6 +109,60 @@ class Wcadastro (QWidget):
         layout_main.addWidget(frame_container)
         self.setLayout(layout_main)
         
+        self.setsys_style()
+        
+        # botao comando
+        self.bt_cadastrar.clicked.connect(self.cadastrar)
+    
+    def setsys_style(self):
+        self.le_usuario.setObjectName(SECONDARY)
+        self.le_senha.setObjectName(SECONDARY)
+        self.le_reSenha.setObjectName(SECONDARY)
+        self.le_email.setObjectName(SECONDARY)
+        self.cb_senha.setObjectName(SECONDARY)
+        
+    def cadastrar(self):
+        usuario = self.le_usuario.text()
+        email = self.le_email.text()
+        senha1 = self.le_senha.text()
+        senha2 = self.le_reSenha.text()
+
+        preencharTdCamposQ = False
+        if not usuario:
+            self.le_usuario.setObjectName(DANGER)
+            self.le_usuario.style().polish(self.le_usuario) #type:ignore
+            # self.le_usuario.style().unpolish(self.le_usuario)
+            preencharTdCamposQ = True
+        if not email:
+            self.le_email.setObjectName(DANGER)
+            self.le_email.style().polish(self.le_email) #type:ignore
+            preencharTdCamposQ = True
+        if not senha1:
+            self.le_senha.setObjectName(DANGER)
+            self.le_senha.style().polish(self.le_senha) # type:ignore
+            preencharTdCamposQ = True
+        if not senha2:
+            self.le_reSenha.setObjectName(DANGER)
+            self.le_reSenha.style().polish(self.le_reSenha) #type:ignore
+            preencharTdCamposQ = True
+            
+        if preencharTdCamposQ:
+            self.lb_aviso.setText('preencha todos os campos')
+            self.lb_aviso.setObjectName(DANGER)
+            self.lb_aviso.style().polish(self.lb_aviso) #type:ignore
+        else:
+            self.lb_aviso.setText('Cadastro feito com sucesso')
+            self.lb_aviso.setObjectName(SUCCESS)
+            self.lb_aviso.style().polish(self.lb_aviso) #type:ignore
+
+            print('cadastro feito com sucesso --------------')
+            print('usuario:',usuario)
+            print('email:',email)
+            print('senha1:',senha1)
+            print('senha2:',senha2)
+            bd.insert_usuario(usuario=usuario, senha=senha1, email=email)
+            
+
     def show_password(self):
         if self.cb_senha.isChecked():
             self.le_senha.setEchoMode(QLineEdit.EchoMode.Normal)
@@ -119,7 +179,12 @@ class Wcadastro (QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Wcadastro()
-    window.setGeometry(100, 100, 800, 800)
+    window.setGeometry(100, 100, 1200, 1000)
+    
+    window.le_usuario.setText('jonas')
+    window.le_email.setText('jonas@email.com')
+    window.le_senha.setText('123')
+    window.le_reSenha.setText('123')
 
     window.show()
     app.setStyleSheet(get_style())

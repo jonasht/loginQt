@@ -99,8 +99,7 @@ class W_recuperarConta(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = W_recuperarConta()
-    window.setGeometry(100, 100, 800, 800)
-
+    window.setGeometry(100, 100, 1200, 1000)
     window.show()
     app.setStyleSheet(get_style())
     sys.exit(app.exec())

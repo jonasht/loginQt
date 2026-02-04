@@ -70,7 +70,7 @@ class W_login (QWidget):
       self.bt_esqueceuSenha.setStyleSheet('''text-align: right;''')
 
       # label aviso
-      self.lb_aviso = QLabel('aviso aqui')
+      self.lb_aviso = QLabel('')
       self.lb_aviso.setAlignment(CENTER)
 
       layout_meio.addWidget(self.lb_aviso, 3, 1)
@@ -78,7 +78,7 @@ class W_login (QWidget):
       # botoes
       layout_bts = QGridLayout()
       self.bt_entrar = QPushButton('Entrar')
-      self.bt_cadastrar = QPushButton('Fazer Cadastrar')
+      self.bt_cadastrar = QPushButton('Cadastrar')
 
       self.bt_entrar.setObjectName(SUCCESS)
       self.bt_cadastrar.setObjectName(INFO)
@@ -88,11 +88,6 @@ class W_login (QWidget):
       layout_bts.addWidget(self.bt_entrar, 0, 0)
       layout_bts.addWidget(self.bt_cadastrar, 1, 0)
       
-      self.bt_fechar = QPushButton('Fechar')
-      self.bt_fechar.setObjectName(DANGER)
-
-      self.bt_fechar.clicked.connect(self.close)
-      layout_baixo.addWidget(self.bt_fechar)
 
       # colocando layouts e frame
       layout_centro_h = QHBoxLayout()
@@ -110,8 +105,8 @@ class W_login (QWidget):
       layout_do_frame.addLayout(layout_baixo)
       layout_do_frame.setContentsMargins(12,0,12,12)
       frame_main.setLayout(layout_do_frame)
-      frame_main.setFixedHeight(600)
-      frame_main.setFixedWidth(500)
+      frame_main.setFixedHeight(800)
+      frame_main.setFixedWidth(700)
 
       layout_main.addWidget(frame_main, 0, CENTER)
 
@@ -125,6 +120,12 @@ class W_login (QWidget):
         print('preecha todos os campos')
         self.lb_aviso.setText('preencha todos os campos')
         self.lb_aviso.setObjectName(DANGER)
+        self.le_usuario.setObjectName(DANGER)
+        self.le_senha.setObjectName(DANGER)
+        self.le_usuario.style().unpolish(self.le_usuario) #type:ignore
+        self.le_senha.style().unpolish(self.le_senha) #type:ignore
+        self.lb_aviso.style().unpolish(self.lb_aviso) #type:ignore
+
       else:
         conta_valida = bd.validar_conta(usuario, senha)
         print('==========================================================================')
@@ -143,6 +144,6 @@ if __name__ == '__main__':
     window = W_login()
     window.setStyleSheet(get_style())
     
-    window.setGeometry(100, 100, 800, 800)
+    window.setGeometry(100, 100, 1200, 1000)
     window.show()
     sys.exit(app.exec())
