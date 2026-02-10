@@ -119,7 +119,7 @@ def update_senha(id, senha):
 def update_nome(id, nome):
     conn = sql.connect(PATH_DATABASE)
     cur = conn.cursor()
-
+    nome = nome.title()
     query = '''UPDATE Usuario
                 SET nome = ?
                 WHERE id = ?'''
@@ -141,12 +141,12 @@ def update_mensagem(id, mensagem):
 if __name__ == '__main__':
     create_db()
     
-    id = validar_conta('jonas', '13234')
+    id = validar_conta('jonas', '123')
     print(id)
     
     print()
     print(get_usuarioByID(2))
     # update_email(2, 'jonas@email.com')
-    update_senha(2, '123')
+    update_nome(2, 'jonas coder')
     print(get_usuarioByID(2))
     # create_db()

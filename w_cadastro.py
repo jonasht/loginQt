@@ -6,14 +6,15 @@ import sys
 from PyQt6.QtCore import Qt
 import util as u
 from style import *
-import bd
+import bancoDeDados as bd
+
 
 
 CENTER = Qt.AlignmentFlag.AlignCenter
 CENTER_TOP = Qt.AlignmentFlag.AlignTop | CENTER
 RIGHT = Qt.AlignmentFlag.AlignRight
 
-class Wcadastro (QWidget):
+class W_cadastro(QWidget):
     def __init__(self) -> None:
         super().__init__()
         
@@ -178,7 +179,7 @@ class Wcadastro (QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = Wcadastro()
+    window = W_cadastro()
     window.setGeometry(100, 100, 1200, 1000)
     
     window.le_usuario.setText('jonas')

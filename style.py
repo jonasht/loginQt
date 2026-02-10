@@ -227,7 +227,7 @@ def load_style():
         file.write(stylesheet)
 
 def get_style():
-    load_style()
+    # load_style()
     with open('style.qss', 'r', encoding='utf-8') as file:
         return file.read()
 

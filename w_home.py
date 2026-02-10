@@ -1,28 +1,29 @@
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QGridLayout, QVBoxLayout, QHBoxLayout,
-    QLabel, QPushButton, QLineEdit, QFrame, QCheckBox,
+    QLabel, QPushButton, QLineEdit, QFrame, QCheckBox, QTextEdit
 )
 import sys
 from PyQt6.QtCore import Qt
 import util as u
 from style import *
-import bd
+import bancoDeDados as bd
+
 
 
 CENTER = Qt.AlignmentFlag.AlignCenter
 CENTER_TOP = Qt.AlignmentFlag.AlignTop | CENTER
 RIGHT = Qt.AlignmentFlag.AlignRight
+from w_homePicture import W_homePicture
 
-class Wcadastro (QWidget):
+class W_home (QWidget):
     def __init__(self) -> None:
         super().__init__()
         
         layout_main = QVBoxLayout()
         frame_container = QFrame()
         layout_container = QVBoxLayout()
-        
         layout_cima = QVBoxLayout()
-        layout_meio = QGridLayout()
+        layout_meio = QHBoxLayout()
         layout_bts = QHBoxLayout()
         layout_baixo = QVBoxLayout()
 
@@ -30,7 +31,7 @@ class Wcadastro (QWidget):
         frame_titulo = QFrame()
         layout_titulo = QVBoxLayout()
         
-        self.lb_titulo = QLabel('Cadastro')
+        self.lb_titulo = QLabel('HOME')
         layout_titulo.addWidget(self.lb_titulo, 0, CENTER)
         frame_titulo.setLayout(layout_titulo)
         layout_cima.addWidget(frame_titulo, 0, CENTER_TOP)
@@ -40,43 +41,19 @@ class Wcadastro (QWidget):
         frame_titulo.setFixedWidth(250)
         frame_titulo.setFixedHeight(80)
         
-        # id =
-        self.lb_id = QLabel('ID:')
-        self.lb_idShow = QLabel('001')
-        layout_meio.addWidget(self.lb_id,0,0)
-        layout_meio.addWidget(self.lb_idShow,0,1)
+        # widget profile picture ------------------------------
+        layout_esquerdo = QVBoxLayout()
+        self.w_picture = W_homePicture()
+        layout_esquerdo.addWidget(self.w_picture)
+        layout_meio.addLayout(layout_esquerdo)
+
         
-        # nome
-        self.lb_nome = QLabel('Nome:')
-        self.le_nome = QLineEdit()
-        self.lb_nome.setAlignment(RIGHT|CENTER)
-        layout_meio.addWidget(self.lb_nome, 1, 0)
-        layout_meio.addWidget(self.le_nome, 1, 1)
-        
-        # email
-        self.lb_email = QLabel('Email:')
-        self.le_email = QLineEdit()
-        self.lb_email.setAlignment(RIGHT|CENTER)
-        layout_meio.addWidget(self.lb_email, 2, 0)
-        layout_meio.addWidget(self.le_email, 2, 1)
-
-        # usuario / login
-        self.lb_usuario = QLabel('Usuario:')
-        self.le_usuario = QLineEdit()
-        layout_meio.addWidget(self.lb_usuario,3,0)
-        layout_meio.addWidget(self.le_usuario, 3, 1)
-
-        # senha
-        self.lb_senha = QLabel('Senha:')
-        self.le_senha = QLineEdit()
-        self.cb_senha = QCheckBox()
-        self.le_senha.setEchoMode(QLineEdit.EchoMode.Password)
-        self.cb_senha.stateChanged.connect(self.show_password)
-        self.lb_senha.setAlignment(RIGHT|CENTER)
-
-        layout_meio.addWidget(self.lb_senha, 4, 0)
-        layout_meio.addWidget(self.le_senha, 4, 1)
-        layout_meio.addWidget(self.cb_senha, 4, 3)
+        # mensagem =================================
+        layout_direito = QVBoxLayout()
+        self.lb_te = QLabel('Mensagem:')
+        self.te_mensagem = QTextEdit()
+        layout_direito.addWidget(self.lb_te)
+        layout_direito.addWidget(self.te_mensagem)
 
 
         # botoes ---------------------------------------
@@ -85,7 +62,9 @@ class Wcadastro (QWidget):
         self.bt_editar.setObjectName(PRIMARY)
         
         layout_bts.addWidget(self.bt_editar)
-        layout_meio.addLayout(layout_bts, 5, 1)
+        layout_direito.addLayout(layout_bts)
+        layout_meio.addLayout(layout_direito)
+        
         # botao voltar --------------------------------
         self.bt_voltar = QPushButton('Voltar')
         self.bt_voltar.setObjectName(PRIMARY)
@@ -106,44 +85,50 @@ class Wcadastro (QWidget):
         
         self.bt_editar.clicked.connect(self.change_les)
         
-        self.start()
         
-    def start(self):
-        self.le_nome.setText(bd.NOME)
-        self.le_email.setText(bd.EMAIL)
-        self.le_senha.setText(bd.SENHA)
+    def start(self, id):
+        # set start home picture, picture e nome
+        self.w_picture.start(id)
+        
+        dados_dict = bd.get_usuarioByID(id)
+        self.id = id
 
-        self.le_nome.setDisabled(True)
-        self.le_email.setDisabled(True)
-        self.le_senha.setDisabled(True)
+        nome = dados_dict['nome']
+        email = dados_dict['email']
+        senha = dados_dict['senha']
+        self.mensagem = dados_dict['mensagem']
+
+        self.te_mensagem.setText(self.mensagem)
         
+
+        print('dados:')
+        print(dados_dict)
+        self.te_mensagem.setDisabled(True)
 
     def change_les(self):
         print('mudar')
-        print(self.le_nome.isEnabled())
-        if self.le_nome.isEnabled():
-            self.le_nome.setEnabled(False)
-            self.le_email.setEnabled(False)
-            self.le_senha.setEnabled(False)
+        if self.te_mensagem.isEnabled():
+            self.te_mensagem.setEnabled(False)
+
             self.bt_editar.setText('Editar')
             self.bt_editar.setObjectName(PRIMARY)
             # self.bt_editar.style().unpolish(self.bt_editar)
-            self.bt_editar.style().polish(self.bt_editar)
+            self.bt_editar.style().polish(self.bt_editar) #type:ignore
         else:
-            self.le_nome.setEnabled(True)
-            self.le_email.setEnabled(True)
-            self.le_senha.setEnabled(True)
+            self.te_mensagem.setEnabled(True)
+            
             self.bt_editar.setText('Confirmar')
             self.bt_editar.setObjectName(SUCCESS)
             # self.bt_editar.style().unpolish(self.bt_editar)
-            self.bt_editar.style().polish(self.bt_editar)
+            self.bt_editar.style().polish(self.bt_editar) #type:ignore
+            
+        mensagem_nova = self.te_mensagem.toPlainText()
+        print('mensagem nova')
+        print(mensagem_nova)
+        if mensagem_nova != self.mensagem:
+            bd.update_mensagem(self.id, mensagem_nova)
 
 
-    def show_password(self):
-        if self.cb_senha.isChecked():
-            self.le_senha.setEchoMode(QLineEdit.EchoMode.Normal)
-        else:
-            self.le_senha.setEchoMode(QLineEdit.EchoMode.Password)
             
         
     
@@ -153,8 +138,10 @@ class Wcadastro (QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = Wcadastro()
+    window = W_home()
     window.setGeometry(100, 100, 1200, 1000)
     window.show()
+    window.start(2)
+
     app.setStyleSheet(get_style())
     sys.exit(app.exec())

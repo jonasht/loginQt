@@ -2,14 +2,19 @@ from PyQt6.QtWidgets import (
     QWidget, QApplication,
     QLabel, QLineEdit, QPushButton, 
     QVBoxLayout, QHBoxLayout, QGridLayout,
-    QFrame,
+    QFrame, QStackedWidget,
     
 )
 from PyQt6.QtCore import Qt
 import sys
 import util as u
 from style import *
-import bd
+import bancoDeDados as bd
+
+from w_recuperarConta import W_recuperarConta
+from w_home import W_home
+from w_cadastro import W_cadastro
+
 
 CENTER = Qt.AlignmentFlag.AlignCenter
 CENTER_TOP = Qt.AlignmentFlag.AlignTop | CENTER
@@ -22,7 +27,8 @@ class W_login (QWidget):
       super().__init__()
       
       layout_main = QVBoxLayout()
-
+      
+    # login ==============================
       layout_cima = QHBoxLayout()
       layout_meio = QGridLayout()
       layout_baixo = QGridLayout()
@@ -107,11 +113,35 @@ class W_login (QWidget):
       frame_main.setLayout(layout_do_frame)
       frame_main.setFixedHeight(800)
       frame_main.setFixedWidth(700)
+      
+      # fim login ===================================
+      self.w_cadastro = W_cadastro()
+      self.w_recuperarConta = W_recuperarConta()
+      self.w_home = W_home()
 
-      layout_main.addWidget(frame_main, 0, CENTER)
+      self.stack = QStackedWidget()
+      self.stack.addWidget(frame_main)
+      self.stack.addWidget(self.w_cadastro)
+      self.stack.addWidget(self.w_recuperarConta)
+      self.stack.addWidget(self.w_home)
 
+      # layout_main.addWidget(frame_main, 0, CENTER)
+
+      layout_main.addWidget(self.stack, 0, CENTER)
+      
       self.setLayout(layout_main)
       
+      # events bts 
+      self.bt_cadastrar.clicked.connect(self.event_cadastro)
+      self.bt_esqueceuSenha.clicked.connect(self.event_recuperarConta)
+  
+  def event_cadastro(self):
+    self.stack.setCurrentIndex(1)
+
+  def event_recuperarConta(self):
+    
+    self.stack.setCurrentIndex(2)
+
   def fazer_login(self):
       usuario = self.le_usuario.text()
       senha = self.le_senha.text()
@@ -127,11 +157,17 @@ class W_login (QWidget):
         self.lb_aviso.style().unpolish(self.lb_aviso) #type:ignore
 
       else:
-        conta_valida = bd.validar_conta(usuario, senha)
+        id = bd.validar_conta(usuario, senha)
+        print('entrar em conta' if id else 'nao entrar')
         print('==========================================================================')
-        print('login feito com sucesso' if conta_valida else 'login invalido')
+        print('login feito com sucesso' if id else 'login invalido')
         print(f'usario:', usuario)
         print(f'senha:', senha)
+        
+        if id:
+          self.w_home.start(id)
+          self.stack.setCurrentIndex(3)
+          
       
 
   def keyPressEvent(self, event): # type:ignore
@@ -143,7 +179,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = W_login()
     window.setStyleSheet(get_style())
-    
+    # default preencher campos automaticamente
+    window.le_usuario.setText('jonas')
+    window.le_senha.setText('123')
     window.setGeometry(100, 100, 1200, 1000)
     window.show()
     sys.exit(app.exec())
