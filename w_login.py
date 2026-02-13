@@ -5,6 +5,9 @@ from PyQt6.QtWidgets import (
     QFrame, QStackedWidget,
     
 )
+
+from PyQt6.QtGui import QPixmap
+
 from PyQt6.QtCore import Qt
 import sys
 import util as u
@@ -30,12 +33,12 @@ class W_login (QWidget):
       
     # login ==============================
       layout_cima = QHBoxLayout()
-      layout_meio = QGridLayout()
+      layout_meio = QHBoxLayout()
       layout_baixo = QGridLayout()
 
       frame_main = QFrame()
       
-      # titulo
+      # titulo ===================================================
       frame_titulo = QFrame()
       layout_frTitulo = QVBoxLayout()
       
@@ -48,19 +51,28 @@ class W_login (QWidget):
       frame_titulo.setStyleSheet(u.TopTitle.frame)
       frame_titulo.setFixedWidth(250)
       frame_titulo.setFixedHeight(80)
+      
+      # meio esquerdo imagem ================================
+      layout_esquerdo = QVBoxLayout()
+      self.lb_pixmap = QLabel()
+      self.lb_pixmap.setPixmap(self.get_widgetImage())
+      layout_esquerdo.addWidget(self.lb_pixmap)
 
-      # usuario 
+      # meio direito ==========================================
+      layout_direito = QVBoxLayout()
+      layout_direitoGrid = QGridLayout()
+      # usuario ===
       self.lb_usuario = QLabel('Usuário:')
       self.le_usuario = QLineEdit()
-      layout_meio.addWidget(self.lb_usuario, 0, 0)
-      layout_meio.addWidget(self.le_usuario, 0, 1)
+      layout_direitoGrid.addWidget(self.lb_usuario, 0, 0)
+      layout_direitoGrid.addWidget(self.le_usuario, 0, 1)
 
       # senha
       self.lb_senha = QLabel('Senha:')
       self.le_senha = QLineEdit()
       self.le_senha.setEchoMode(QLineEdit.EchoMode.Password)
-      layout_meio.addWidget(self.lb_senha, 1, 0)
-      layout_meio.addWidget(self.le_senha, 1, 1)
+      layout_direitoGrid.addWidget(self.lb_senha, 1, 0)
+      layout_direitoGrid.addWidget(self.le_senha, 1, 1)
 
       self.le_usuario.setFixedWidth(300)
       self.le_senha.setFixedWidth(300)
@@ -69,18 +81,19 @@ class W_login (QWidget):
       self.le_senha.setAlignment(CENTER)
       self.lb_usuario.setAlignment(RIGHT | CENTER_V)
       self.lb_senha.setAlignment(RIGHT | CENTER_V)
+      
       # botao link esqueceu a senha
       self.bt_esqueceuSenha = QPushButton('Esqueceu a senha?')
       self.bt_esqueceuSenha.setObjectName(LINK)
-      layout_meio.addWidget(self.bt_esqueceuSenha, 2, 1)
+      layout_direitoGrid.addWidget(self.bt_esqueceuSenha, 2, 1)
       self.bt_esqueceuSenha.setStyleSheet('''text-align: right;''')
 
       # label aviso
       self.lb_aviso = QLabel('')
       self.lb_aviso.setAlignment(CENTER)
 
-      layout_meio.addWidget(self.lb_aviso, 3, 1)
-
+      layout_direitoGrid.addWidget(self.lb_aviso, 3, 1)
+      
       # botoes
       layout_bts = QGridLayout()
       self.bt_entrar = QPushButton('Entrar')
@@ -95,9 +108,23 @@ class W_login (QWidget):
       layout_bts.addWidget(self.bt_cadastrar, 1, 0)
       
 
-      # colocando layouts e frame
+
+      # frame_main.setFixedHeight(800)
+      # frame_main.setFixedWidth(700)
+      
+      # fim login ===================================
+      self.w_cadastro = W_cadastro()
+      self.w_recuperarConta = W_recuperarConta()
+      self.w_home = W_home()
+
+      self.stack = QStackedWidget()
+      self.stack.addWidget(frame_main)
+      self.stack.addWidget(self.w_cadastro)
+      self.stack.addWidget(self.w_recuperarConta)
+      self.stack.addWidget(self.w_home)
+
+      # layouts principais ===================================
       layout_centro_h = QHBoxLayout()
-      layout_centro_h.addStretch()
       layout_centro_h.addLayout(layout_meio)
       layout_centro_h.addStretch()
 
@@ -111,22 +138,12 @@ class W_login (QWidget):
       layout_do_frame.addLayout(layout_baixo)
       layout_do_frame.setContentsMargins(12,0,12,12)
       frame_main.setLayout(layout_do_frame)
-      frame_main.setFixedHeight(800)
-      frame_main.setFixedWidth(700)
-      
-      # fim login ===================================
-      self.w_cadastro = W_cadastro()
-      self.w_recuperarConta = W_recuperarConta()
-      self.w_home = W_home()
-
-      self.stack = QStackedWidget()
-      self.stack.addWidget(frame_main)
-      self.stack.addWidget(self.w_cadastro)
-      self.stack.addWidget(self.w_recuperarConta)
-      self.stack.addWidget(self.w_home)
-
       # layout_main.addWidget(frame_main, 0, CENTER)
-
+      layout_meio.addLayout(layout_esquerdo)
+      layout_direito.addStretch()
+      layout_direito.addLayout(layout_direitoGrid)
+      layout_direito.addStretch()
+      layout_meio.addLayout(layout_direito)
       layout_main.addWidget(self.stack, 0, CENTER)
       
       self.setLayout(layout_main)
@@ -134,7 +151,15 @@ class W_login (QWidget):
       # events bts 
       self.bt_cadastrar.clicked.connect(self.event_cadastro)
       self.bt_esqueceuSenha.clicked.connect(self.event_recuperarConta)
-  
+  def get_widgetImage(self):
+      pixmap = QPixmap('./fotos/coruja.jpg')
+      rect = pixmap.rect()
+      # pixmap = pixmap.copy(rect.x(), rect.y(), rect.width() // 2, rect.height() // 2)
+      pixmap = pixmap.copy(130, 200, 1000, 900)
+      pixmap = pixmap.scaled(600,600)
+      
+      return pixmap
+
   def event_cadastro(self):
     self.stack.setCurrentIndex(1)
 
