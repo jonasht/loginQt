@@ -230,8 +230,43 @@ def get_style():
     # load_style()
     with open('style.qss', 'r', encoding='utf-8') as file:
         return file.read()
+class Jcode:
+    
+    # radius all sides ===========================================
+    radiusAll20 = 'border-radius: 20px;'
+    radiusAll40 = 'border-radius: 40px;'
+    radiusAll60 = 'border-radius: 60px;'
+    # radius 20px ===============================================
+    radiusTopLeft20 = 'border-top-left-radius: 20px;'
+    radiusTopRight20 = 'border-top-right-radius: 20px;' 
+    radiusBottomRight20 = 'border-bottom-right-radius: 20px;' 
+    radiusBottomLeft20 = 'border-bottom-left-radius: 20px;' 
+    # radius 40px ================================================
+    radiusTopLeft20 = 'border-top-left-radius: 40px;'
+    radiusTopRight20 = 'border-top-right-radius: 40px;' 
+    radiusBottomRight20 = 'border-bottom-right-radius: 40px;' 
+    radiusBottomLeft20 = 'border-bottom-left-radius: 40px;' 
+    
+    
+    def lb(self, *vars):
+    # Junta todas as variáveis em uma única string
+        style_props = ' '.join(vars)
+        # Monta a regra completa para QLabel
+        style = f'QLabel {{ {style_props} }}'
+        # print(style)
+        return style
+    def fr(self, *vars):
+        style = ' '.join(vars)
+        style = f'QFrame {{ {style} }}'
+        # print(style)
+        return style
+
+    
 
         
 if __name__ == '__main__':
-    print('\n'*20)
-    print(Jstyle.BT_PRIMARY)
+    c = Jcode()
+    c.lb(c.radiusTopLeft20, c.radiusBottomLeft20)
+    print()
+    c.fr(c.radiusBottomLeft20, c.radiusTopLeft20)
+

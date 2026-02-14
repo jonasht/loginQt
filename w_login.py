@@ -34,7 +34,6 @@ class W_login (QWidget):
     # login ==============================
       layout_cima = QHBoxLayout()
       layout_meio = QHBoxLayout()
-      layout_baixo = QGridLayout()
 
       frame_main = QFrame()
       
@@ -134,29 +133,30 @@ class W_login (QWidget):
       layout_do_frame.addLayout(layout_centro_h) 
       layout_do_frame.addStretch()
       
-      layout_do_frame.addLayout(layout_bts)
-      layout_do_frame.addLayout(layout_baixo)
-      layout_do_frame.setContentsMargins(12,0,12,12)
+      layout_do_frame.setContentsMargins(0,0,12,12)
       frame_main.setLayout(layout_do_frame)
       # layout_main.addWidget(frame_main, 0, CENTER)
+      
       layout_meio.addLayout(layout_esquerdo)
       layout_direito.addStretch()
       layout_direito.addLayout(layout_direitoGrid)
       layout_direito.addStretch()
+      layout_direito.addLayout(layout_bts)
       layout_meio.addLayout(layout_direito)
       layout_main.addWidget(self.stack, 0, CENTER)
       
       self.setLayout(layout_main)
       
-      # events bts 
+      # events bts ------------------------------------------------------
       self.bt_cadastrar.clicked.connect(self.event_cadastro)
       self.bt_esqueceuSenha.clicked.connect(self.event_recuperarConta)
   def get_widgetImage(self):
       pixmap = QPixmap('./fotos/coruja.jpg')
-      rect = pixmap.rect()
       # pixmap = pixmap.copy(rect.x(), rect.y(), rect.width() // 2, rect.height() // 2)
       pixmap = pixmap.copy(130, 200, 1000, 900)
       pixmap = pixmap.scaled(600,600)
+      
+      pixmap = u.round_corners(pixmap, {'top-right':120, 'bottom-right':120})
       
       return pixmap
 
